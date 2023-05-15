@@ -15,13 +15,13 @@
         "start": "@tina4 webservice:run",
         "start-service": "@tina4service"
     },
-    "classmap": [
-        "src/*",
-        "src/app/*",
-        "src/orm/*",
-        "src/routes/*"
-    ],
     "autoload": {
+        "classmap": [
+            "src/",
+            "src/app/",
+            "src/orm/",
+            "src/routes/"
+        ],
         "files": [
             "loadModule.php"
         ],
