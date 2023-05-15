@@ -1,7 +1,9 @@
 {
-    "name": "tina4components/Tina4TrelloIntegration",
+    "name": "tina4components/tina4trellointegration",
+    "type": "library",
+    "description": "A short description of what your package does",
     "require": {
-        "tina4stack/tina4php": "dev-master",
+        "tina4stack/tina4php": "^2.0",
       "ext-curl": "*"
     },
     "scripts": {
