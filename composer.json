@@ -1,7 +1,7 @@
 {
     "name": "tina4components/Tina4TrelloIntegration",
     "require": {
-        "tina4stack/tina4php": "^2.0",
+        "tina4stack/tina4php": "dev-master",
       "ext-curl": "*"
     },
     "scripts": {
