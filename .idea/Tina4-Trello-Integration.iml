@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/scssphp/scssphp" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/setasign/fpdi" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/twig" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mpdf/mpdf" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mpdf/psr-log-aware-trait" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nowakowskir/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php-shape" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php-database" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php-orm" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/coyl/git" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php-debug" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php-env" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpfastcache/phpfastcache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/simple-cache" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
+  </component>
+</module>

@@ -1,0 +1,7 @@
+<div id="trello-card-{{ card.id }}" card-position="{{ card.pos }}" class="trello-list-items-item" onclick="getCardDetails('{{card.id}}', '{{ formToken | raw }}')">
+    {{ card.name }}
+    {% if card.due %}
+        <br>
+        <span class="trello-list-items-item-date">Due On: <strong>{{ card.due | date("m/d/Y @ h:m") }}</strong></span>
+    {% endif %}
+</div>

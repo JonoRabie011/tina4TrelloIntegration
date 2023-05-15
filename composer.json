@@ -1,0 +1,34 @@
+{
+    "require": {
+        "tina4stack/tina4php": "^2.0",
+      "ext-curl": "*"
+    },
+    "scripts": {
+        "tina4": "tina4",
+        "tina4service": "tina4service",
+        "test": "@tina4 tests:run",
+        "test:verbose": "@tina4 tests:verbose",
+        "initialize": "@tina4 initialize:run",
+        "start": "@tina4 webservice:run",
+        "start-service": "@tina4service"
+    },
+    "classmap": [
+        "src/*",
+        "src/app/*",
+        "src/orm/*",
+        "src/routes/*"
+    ],
+    "autoload": {
+        "psr-4": {
+            "\\": [
+                "src/",
+                "src/app/",
+                "src/orm/",
+                "src/routes"
+            ]
+        }
+    },
+    "config": {
+        "process-timeout": 0
+    }
+}

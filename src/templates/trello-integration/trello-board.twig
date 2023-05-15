@@ -1,0 +1,87 @@
+{% extends 'base.twig' %}
+{% block content %}
+    {% include "trello-integration/trello-board-header.twig" with { board: board } %}
+
+    <section id="trello-lists-container" class="trello-lists-container py-3 px-5">
+        {% for list in board.lists %}
+            {#    List    #}
+            {% include "trello-integration/lists/trello-list.twig" with { list : list } %}
+            {#    List -> END    #}
+        {% endfor %}
+
+        {% include "trello-integration/lists/trello-list-create-form-mini.twig" with { board: board }%}
+
+    </section>
+
+    <div id="trello-message"></div>
+
+    <script>
+        $(function (){
+            $(".trello-list-items").sortable({
+                connectWith: ".trello-list-items",
+                placeholder: "portlet-placeholder ui-corner-all",
+                cancel: ".portlet-toggle",
+                cursor:'move',
+                delay: 358,
+                stop: (event, ui) => {
+                    var moved = ui.item,
+                        movedFrom = event.target,
+                        movedToId = "", movedFromId = "", cardId = "";
+
+                    movedFromId = movedFrom.getAttribute('id').replace("trello-list-", "")
+                        .replace("-items", "");
+                    movedToId =  $(moved).parent().attr("id").replace("trello-list-", "")
+                        .replace("-items", "");
+
+                    cardId = moved[0].getAttribute("id").replace("trello-card-", "");
+
+                    // console.log("Event::", event);
+                    // console.log("UI::", ui);
+                    const movedEl = document.getElementById(`trello-card-${cardId}`);
+                    const prevEl = movedEl.previousElementSibling;
+                    const nextEl = movedEl.nextElementSibling;
+                    let newCardPos = 8000, prevElPos = 0, nextElPos = 0;
+
+                    let body = {};
+
+                    if(prevEl) {
+                        prevElPos =  parseFloat(prevEl.getAttribute("card-position"));
+                    }
+
+                    if(nextEl) {
+                        nextElPos = parseFloat(nextEl.getAttribute("card-position"))
+                    }
+
+                    newCardPos = prevElPos + (Math.abs(nextElPos - prevElPos) / 2);
+
+                    body = {
+                        "idList": movedToId,
+                        "pos": newCardPos
+                    };
+
+
+                    // console.log("Moved From", movedFromId);
+                    // console.log("Moved To", movedToId);
+                    // console.log("Card Id", cardId);
+
+                    console.log(body);
+
+                    fetch(`/trello/card/${cardId}/move?formToken={{ formToken('trello/move-card')}}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(body)
+                    })
+                        .then((response) => response.json())
+                        .then((json) => {
+                            if (!json.error) {
+                                document.getElementById(`trello-list-${movedToId}-items`).innerHTML = json.data;
+                            }
+                        });
+
+                }
+            });
+        });
+    </script>
+{% endblock %}
