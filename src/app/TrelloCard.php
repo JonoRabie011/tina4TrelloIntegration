@@ -21,7 +21,7 @@ class TrelloCard extends TrelloIntegration
         $this->addQueryParam("idList", $listId);
         $this->addQueryParam("name", $cardTitle);
 
-        $curlHelper = new CurlHelper($curlUrl, $this->queryParams, "POST");
+        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams, "POST");
 
         return $curlHelper->doCurl();
     }
@@ -36,7 +36,7 @@ class TrelloCard extends TrelloIntegration
     {
         $curlUrl = $this->getBaseUrl()."/cards/".$cardId;
 
-        $curlHelper = new CurlHelper($curlUrl, $this->queryParams);
+        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams);
 
         return $curlHelper->doCurl();
     }
@@ -53,7 +53,7 @@ class TrelloCard extends TrelloIntegration
 
         $this->addQueryParams($cardParams);
 
-        $curlHelper = new CurlHelper($curlUrl, $this->queryParams, "PUT");
+        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams, "PUT");
 
         return $curlHelper->doCurl();
     }

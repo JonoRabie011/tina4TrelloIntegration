@@ -25,7 +25,7 @@ class TrelloOrganization extends TrelloIntegration
             "displayName" => $displayName
         ]);
 
-        $curlHelper = new CurlHelper($curlUrl, $this->queryParams, "POST");
+        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams, "POST");
 
         return $curlHelper->doCurl();
     }

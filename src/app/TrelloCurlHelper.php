@@ -3,7 +3,7 @@
 use Psr\Log\LogLevel;
 use \Tina4\Debug;
 
-class CurlHelper
+class TrelloCurlHelper
 {
     public bool $HeaderAuth = False;
     public string $HeaderAuthType = "BASIC";

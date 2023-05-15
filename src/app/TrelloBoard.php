@@ -26,7 +26,7 @@ class TrelloBoard extends TrelloIntegration
 //            "cards" => "open" //Used to flag that cards com back
 //        ]);
 
-        $curlHelper = new CurlHelper($curlUrl, $this->queryParams);
+        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams);
 
         return $curlHelper->doCurl();
     }
@@ -41,7 +41,7 @@ class TrelloBoard extends TrelloIntegration
     {
         $curlUrl = $this->getBaseUrl()."/boards/{$boardId}/lists";
 
-        $curlHelper = new CurlHelper($curlUrl, $this->queryParams);
+        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams);
 
         return $curlHelper->doCurl();
     }
