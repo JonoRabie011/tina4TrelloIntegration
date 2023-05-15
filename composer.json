@@ -1,6 +1,25 @@
 {
     "name": "tina4components/tina4trellointegration",
     "description": "A short description of what your package does",
+    "license": "MIT",
+    "classmap": [
+        "src/*"
+    ],
+    "autoload": {
+        "files": [
+            "loadModule.php"
+        ],
+        "psr-4": {
+            "\\": [
+                "src/",
+                "src/app/",
+                "src/orm/",
+                "src/routes"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "tina4stack/tina4php": "^2.0",
       "ext-curl": "*"
@@ -14,27 +33,7 @@
         "start": "@tina4 webservice:run",
         "start-service": "@tina4service"
     },
-    "autoload": {
-        "classmap": [
-            "src/",
-            "src/app/",
-            "src/orm/",
-            "src/routes/"
-        ],
-        "files": [
-            "loadModule.php"
-        ],
-        "psr-4": {
-            "\\": [
-                "src/",
-                "src/app/",
-                "src/orm/",
-                "src/routes"
-            ]
-        }
-    },
     "config": {
         "process-timeout": 0
-    },
-    "minimum-stability": "dev"
+    }
 }
