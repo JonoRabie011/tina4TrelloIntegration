@@ -1,4 +1,5 @@
 {
+    "name": "tina4components/Tina4TrelloIntegration",
     "require": {
         "tina4stack/tina4php": "^2.0",
       "ext-curl": "*"
@@ -19,6 +20,9 @@
         "src/routes/*"
     ],
     "autoload": {
+        "files": [
+            "loadModule.php"
+        ],
         "psr-4": {
             "\\": [
                 "src/",
