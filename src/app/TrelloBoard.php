@@ -11,39 +11,40 @@ class TrelloBoard extends TrelloIntegration
 
     /**
      * Get Full Trello board
-     * @param $boardId
-     * @return false|mixed|string
+     * @param string $boardId Id of board you want to fetch
+     * @param bool $fetchLists "true" if you want to retrieve lists for board
+     * @param bool $fetchCards "true" if you want to retrieve card for board
+     * @return array | mixed
      */
-    public function getBoard($boardId): mixed
+    public function getBoard(string $boardId, bool $fetchLists = false, bool $fetchCards = false): mixed
     {
-        $curlUrl = $this->getBaseUrl()."/boards/{$boardId}";
 
-        $this->addQueryParam("lists", "open"); //Used to flag that lists com back
-        $this->addQueryParam("cards", "open"); //Used to flag that cards com back
+        if($fetchLists)
+        {
+            $this->addQueryParam("lists", "open"); //Used to flag that lists com back
+        }
 
-//        $this->queryParams = array_merge($this->queryParams, [
-//            "lists" => "open", //Used to flag that lists com back
-//            "cards" => "open" //Used to flag that cards com back
-//        ]);
+        if($fetchCards)
+        {
+            $this->addQueryParam("cards", "open"); //Used to flag that cards com back
+        }
 
-        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams);
-
-        return $curlHelper->doCurl();
+        return $this->sendRequest("/boards/{$boardId}".$this->getParamString());
     }
 
 
-    /**
-     * Get All Lists on a board using Board Id
-     * @param $boardId
-     * @return false|mixed|string
-     */
-    public function getListOnBoard($boardId): mixed
-    {
-        $curlUrl = $this->getBaseUrl()."/boards/{$boardId}/lists";
-
-        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams);
-
-        return $curlHelper->doCurl();
-    }
+//    /**
+//     * Get All Lists on a board using Board Id
+//     * @param $boardId
+//     * @return false|mixed|string
+//     */
+//    public function getListOnBoard($boardId): mixed
+//    {
+//        $curlUrl = $this->getBaseUrl();
+//
+//        $trelloCurl = new \Tina4\Api($curlUrl);
+//
+//        return $trelloCurl->sendRequest("/boards/{$boardId}/lists");
+//    }
 
 }

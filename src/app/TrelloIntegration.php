@@ -1,10 +1,16 @@
 <?php
 
-class TrelloIntegration
+class TrelloIntegration extends \Tina4\Api
 {
     private string $APIKey = "";
+
     private string $APIToken = "";
-    private string $trelloBaseUrl = "https://api.trello.com/1";
+
+    /**
+     * @var string|null Base url for the Api
+     */
+    public $baseURL = "https://api.trello.com/1";
+
     public array $queryParams = [];
 
 
@@ -41,15 +47,6 @@ class TrelloIntegration
     }
 
     /**
-     * Get Base Url
-     * @return string
-     */
-    public function getBaseUrl(): string
-    {
-        return $this->trelloBaseUrl;
-    }
-
-    /**
      * Get Api Key
      * @return string
      */
@@ -68,12 +65,12 @@ class TrelloIntegration
     }
 
     /**
-     * Update Base url? Change to rather use V2
+     * Update Base url?
      * @param string $baseUrl "New base url to use"
      * @return void
      */
     public function setBaseUrl(string $baseUrl): void {
-        $this->trelloBaseUrl = $baseUrl;
+        $this->baseURL = $baseUrl;
     }
 
     /**
@@ -97,6 +94,27 @@ class TrelloIntegration
     public function addQueryParams(array $params): void
     {
         $this->queryParams = array_merge($this->queryParams, $params);
+    }
+
+    /**
+     * Function used to get full url with query params appended
+     * @return string
+     */
+    public function getParamString() : string
+    {
+        if(!empty($this->queryParams))
+        {
+            $paramArray = [];
+            foreach ($this->queryParams as $key => $param ) {
+                $param = urlencode($param);
+                $paramArray[] = "{$key}={$param}";
+            }
+            return "?".implode("&", $paramArray);
+        }
+        else
+        {
+            return "";
+        }
     }
 
 

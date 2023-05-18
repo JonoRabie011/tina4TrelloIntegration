@@ -3,6 +3,10 @@
 class TrelloList extends TrelloIntegration
 {
 
+    /**
+     * @param $APIKey
+     * @param $APIToken
+     */
     public function __construct($APIKey = "", $APIToken = "")
     {
         parent::__construct($APIKey, $APIToken);
@@ -16,11 +20,7 @@ class TrelloList extends TrelloIntegration
      */
     public function getList($listId): mixed
     {
-        $curlUrl = $this->getBaseUrl()."/lists/{$listId}";
-
-        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams);
-
-        return $curlHelper->doCurl();
+        return $this->sendRequest("/lists/{$listId}".$this->getParamString());
     }
 
     /**
@@ -30,26 +30,18 @@ class TrelloList extends TrelloIntegration
      */
     public function getCardsInList($listId): mixed
     {
-        $curlUrl = $this->getBaseUrl()."/lists/{$listId}/cards";
-
-        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams);
-
-        return $curlHelper->doCurl();
+        return $this->sendRequest("/lists/{$listId}/cards".$this->getParamString());
     }
 
+    //@Todo fix documentation here
     public function createTrelloList($boardId, $body)
     {
-        $curlUrl = $this->getBaseUrl()."/lists";
-
         $this->addQueryParam("idBoard", $boardId);
         $this->addQueryParam("name", $body->title);
 
         if(isset($body->pos)) {
             $this->addQueryParam("pos", $body->pos);
         }
-
-
-        $curlHelper = new TrelloCurlHelper($curlUrl, $this->queryParams, "POST");
-        return $curlHelper->doCurl();
+        return $this->sendRequest("/lists".$this->getParamString());
     }
 }

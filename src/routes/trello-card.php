@@ -9,7 +9,7 @@ Get::add("/trello/card/{cardId}/details", function ($cardId ,Response $response)
 
     if (!empty($cardId))
     {
-        $trello = new TrelloCard("9fb154545893f22de9ed873aec6312b1","ATTAcd49628822d900315bcff3aebb7fa8a94ec050a9718cca01091b8b6db6996ad2B612A3B8");
+        $trello = new TrelloCard();
 
         $trelloResponse = $trello->getCard($cardId);
 
@@ -44,7 +44,7 @@ Get::add("/trello/card/{cardId}/details", function ($cardId ,Response $response)
 
 Post::add("/trello/card/{cardId}/move", function($cardId, Response $response, Request $request) {
 
-    $trello = new TrelloCard("9fb154545893f22de9ed873aec6312b1","ATTAcd49628822d900315bcff3aebb7fa8a94ec050a9718cca01091b8b6db6996ad2B612A3B8");
+    $trello = new TrelloCard();
 
     $trelloResponse = $trello->moveCard($cardId, (array)$request->data);
 
@@ -80,7 +80,7 @@ Post::add("/trello/card/create", function (Response $response, Request $request)
 
     if(isset($request->data->list) && isset($request->data->title))
     {
-        $trello = new TrelloCard("9fb154545893f22de9ed873aec6312b1","ATTAcd49628822d900315bcff3aebb7fa8a94ec050a9718cca01091b8b6db6996ad2B612A3B8");
+        $trello = new TrelloCard();
 
         $trelloResponse = $trello->createCard($request->data->list, $request->data->title);
 
@@ -93,10 +93,8 @@ Post::add("/trello/card/create", function (Response $response, Request $request)
         else
         {
             return $response(\Tina4\renderTemplate("/trello-integration/cards/trello-card.twig", [
-                "card" => $trelloResponse
+                "card" => $trelloResponse["body"]
             ]), HTTP_OK, TEXT_HTML);
         }
     }
-
-
 });

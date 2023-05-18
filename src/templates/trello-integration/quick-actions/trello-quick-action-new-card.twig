@@ -1,0 +1,62 @@
+{% extends "base.twig" %}
+{% block content %}
+{#    {{dump(boards)}}#}
+    <form>
+        <div class="mb-3">
+            <label for="trello-board-select">Board Name</label>
+            <select id="trello-board-select" name="board" class="form-select" aria-label="Select a board"
+                    onchange="renderBoardLists(this.value, {{ boards | json_encode()}})">
+                <option selected>Select a board</option>
+                {% for organization in organizations %}
+                    {%if (boards | filter(board => board.organization.id == organization.id)) | length > 0 %}
+                        <optgroup label="{{organization.displayName}}">
+                            {% for board in boards | filter(board => board.organization.id == organization.id) %}
+                                <option value="{{ board.id }}">{{ board.name }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div id="trello-list-container" class="mb-3 invisible">
+            <label for="trello-list-select">List</label>
+            <select id="trello-list-select" name="list" class="form-select"
+                    aria-label="Select a list" onchange="listSelectionChange()"></select>
+        </div>
+
+        <div id="trello-card-title-container" class="mb-3 invisible">
+            <label for="trello-card-title">Card Name</label>
+            <input id="trello-card-title" type="text" class="form-control">
+        </div>
+    </form>
+
+    <script>
+        var boardSelect = document.getElementById("board-select");
+
+        function renderBoardLists(selectedBoard, boards) {
+            const listSelectContainer = document.getElementById("trello-list-container");
+            if(selectedBoard !== "Select a board") {
+                console.log(selectedBoard);
+                const lists = boards.find((board) => board.id === selectedBoard)["lists"];
+                if (lists) {
+                    const listSelect = document.getElementById("trello-list-select");
+                    let selectOptions = "";
+                    lists.forEach((list) => {
+                        selectOptions += `<option value="${list.id}">${list.name}</option>`
+                    });
+
+                    listSelect.innerHTML = selectOptions;
+                    listSelectContainer.classList.toggle("invisible");
+                }
+            }
+        }
+
+        function listSelectionChange() {
+            let cardTitleContainer = document.getElementById("trello-card-title-container");
+
+            if (cardTitleContainer.classList.contains("invisible")) {
+                cardTitleContainer.classList.toggle("invisible");
+            }
+        }
+    </script>
+{% endblock %}
