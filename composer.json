@@ -1,6 +1,6 @@
 {
     "name": "tina4components/tina4trellointegration",
-    "description": "A short description of what your package does",
+    "description": "This is a package that will allow you to add trello functionality to any tin4 project",
     "license": "MIT",
     "classmap": [
         "src/*"
