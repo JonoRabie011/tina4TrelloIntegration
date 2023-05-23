@@ -4,10 +4,12 @@ class TrelloList extends TrelloIntegration
 {
 
     /**
-     * @param $APIKey
-     * @param $APIToken
+     * If API Key or token is not set it will look for ENV variables -> <br>
+     * <i>"TRELLO_API_KEY" & "TRELLO_API_TOKEN"</i>
+     * @param string $APIKey
+     * @param string $APIToken
      */
-    public function __construct($APIKey = "", $APIToken = "")
+    public function __construct(string $APIKey = "", string $APIToken = "")
     {
         parent::__construct($APIKey, $APIToken);
     }

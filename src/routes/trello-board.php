@@ -4,11 +4,13 @@ use \Tina4\Get;
 use \Tina4\Response;
 use \Tina4\Request;
 
-Get::add("/trello/{boardId}", function ($boardId, Response $response) {
+Get::add("/trello/{boardId}", function ($boardId, Response $response, Request $request) {
 
 //    $boardId = "644680c3625d1df750b993e1";
 
     $trello = new TrelloBoard();
+
+    TrelloToolbox::setTokensFromRequest($trello, $request);
 
     $trelloBoard = $trello->getBoard($boardId, true, true);
 

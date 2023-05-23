@@ -1,0 +1,26 @@
+{% extends "base.twig" %}
+{% block content %}
+    <div class="trello-notifications-list-container p-3">
+
+        <div class="row">
+            <div class="col-8">
+                <h2 class="mb-4">
+                    Notifications
+                </h2>
+            </div>
+
+            <div class="col-4">
+                <span class="float-end">{{ today }}</span>
+            </div>
+        </div>
+
+        {% for notification in notifications %}
+            <div class="row g-2">
+                {#    {{ notification.type }}#}
+                {% if notification.type == 'cardDueSoon' %}
+                    {% include "trello-integration/notifications/notifications-types/trello-notification-card-due.twig" with { notification, today } %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

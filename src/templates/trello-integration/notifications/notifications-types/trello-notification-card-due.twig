@@ -1,0 +1,15 @@
+<div class="col-12">
+{#    <span>{{ dump(notification) }}</span>#}
+    <div class="card">
+        <div class="card-header">
+            <strong>Reminder</strong>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title p-0">{{ notification.data.card.name }}</h5>
+            <span class="d-block mb-3">Card {{ today < notification.data.card.due? 'Due Soon' : "Over Due"}} {{ notification.data.card.due | date("d M Y @ H:i") }}</span>
+            <a href="https://trello.com/c/{{ notification.data.card.shortLink }}" target="_blank" class="btn btn-primary">
+                View Card
+            </a>
+        </div>
+    </div>
+</div>

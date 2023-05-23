@@ -1,10 +1,14 @@
 <?php
 
-use \Tina4\Api;
-
 class TrelloMember extends TrelloIntegration
 {
 
+    /**
+     * If API Key or token is not set it will look for ENV variables -> <br>
+     * <i>"TRELLO_API_KEY" & "TRELLO_API_TOKEN"</i>
+     * @param string $APIKey
+     * @param string $APIToken
+     */
     public function __construct(string $APIKey = "", string $APIToken = "")
     {
         parent::__construct($APIKey, $APIToken);
@@ -77,5 +81,11 @@ class TrelloMember extends TrelloIntegration
 
         return $this->sendRequest("/members/{$memberId}/boards".$this->getParamString());
 
+    }
+
+    public function getMemberNotifications($memberId, $readFilter = "all", )
+    {
+
+        return $this->sendRequest("/members/{$memberId}/notifications".$this->getParamString());
     }
 }

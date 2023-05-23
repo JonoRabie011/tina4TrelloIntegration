@@ -65,6 +65,24 @@ class TrelloIntegration extends \Tina4\Api
     }
 
     /**
+     * Update Auth Tokens for Object
+     * @param string $APIKey
+     * @param string $APIToken
+     * @return void
+     */
+    public function setAuthTokens(string $APIKey, string $APIToken): void
+    {
+        if (!empty($APIToken) && $APIKey)
+        {
+            $this->APIKey = $APIKey;
+            $this->APIToken = $APIToken;
+
+            $this->queryParams["key"] = $this->APIKey;
+            $this->queryParams["token"] = $this->APIToken;
+        }
+    }
+
+    /**
      * Update Base url?
      * @param string $baseUrl "New base url to use"
      * @return void
@@ -120,10 +138,9 @@ class TrelloIntegration extends \Tina4\Api
 
     /**
      * Rest Query Params
-     * @param array $params ["key1","key2"]
      * @return void
      */
-    public function restQueryParams(array $params): void
+    public function restQueryParams(): void
     {
         $this->queryParams = [
             "key" => $this->APIKey,

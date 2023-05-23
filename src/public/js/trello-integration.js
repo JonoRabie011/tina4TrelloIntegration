@@ -1,3 +1,44 @@
+function renderBoardLists(selectedBoard, boards) {
+    const listSelectContainer = document.getElementById("trello-list-container");
+    if(selectedBoard !== "Select a board") {
+        console.log(selectedBoard);
+        const lists = boards.find((board) => board.id === selectedBoard)["lists"];
+        let cardTitleContainer = document.getElementById("trello-card-title-container");
+
+        console.log(lists);
+        if (lists.length !== 0) {
+            const listSelect = document.getElementById("trello-list-select");
+            let selectOptions = "";
+            lists.forEach((list) => {
+                selectOptions += `<option value="${list.id}">${list.name}</option>`
+            });
+
+            listSelect.innerHTML = selectOptions;
+
+            if (listSelectContainer.classList.contains("invisible")) {
+                listSelectContainer.classList.remove("invisible");
+                listSelectContainer.classList.remove("d-none");
+            }
+        }
+        else
+        {
+            listSelectContainer.classList.add("invisible");
+            listSelectContainer.classList.add("d-none");
+            cardTitleContainer.classList.add("invisible");
+            cardTitleContainer.classList.add("d-none");
+        }
+    }
+}
+
+function listSelectionChange() {
+    let cardTitleContainer = document.getElementById("trello-card-title-container");
+
+    if (cardTitleContainer.classList.contains("invisible")) {
+        cardTitleContainer.classList.remove("invisible");
+        cardTitleContainer.classList.remove("d-none");
+    }
+}
+
 // These are Trello All List related JS functions
 
 function createTrelloList(boardId, formToken) {

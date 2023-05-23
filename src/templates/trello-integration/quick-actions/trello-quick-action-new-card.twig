@@ -1,7 +1,9 @@
 {% extends "base.twig" %}
 {% block content %}
 {#    {{dump(boards)}}#}
-    <form>
+    <form id="trelloQuickActionCreateCardForm" class="m-4"
+          action="/trello/quick-action/card/add/{{ member }}{{ token and key ? "?token="~token~"&key="~key : ""}}"
+          method="post">
         <div class="mb-3">
             <label for="trello-board-select">Board Name</label>
             <select id="trello-board-select" name="board" class="form-select" aria-label="Select a board"
@@ -18,45 +20,27 @@
                 {% endfor %}
             </select>
         </div>
-        <div id="trello-list-container" class="mb-3 invisible">
+        <div id="trello-list-container" class="mb-3 invisible d-none">
             <label for="trello-list-select">List</label>
             <select id="trello-list-select" name="list" class="form-select"
                     aria-label="Select a list" onchange="listSelectionChange()"></select>
         </div>
 
-        <div id="trello-card-title-container" class="mb-3 invisible">
+        <div id="trello-card-title-container" class="mb-3 invisible d-none">
             <label for="trello-card-title">Card Name</label>
-            <input id="trello-card-title" type="text" class="form-control">
+            <input id="trello-card-title" name="title" type="text" class="form-control">
         </div>
+
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn">Cancel</button>
+                <button type="submit" class="btn btn-primary">Create Card</button>
+            </div>
+        </div>
+
+        {{ "trelloQuickActionCreateCardForm" | formToken | raw }}
     </form>
 
     <script>
-        var boardSelect = document.getElementById("board-select");
-
-        function renderBoardLists(selectedBoard, boards) {
-            const listSelectContainer = document.getElementById("trello-list-container");
-            if(selectedBoard !== "Select a board") {
-                console.log(selectedBoard);
-                const lists = boards.find((board) => board.id === selectedBoard)["lists"];
-                if (lists) {
-                    const listSelect = document.getElementById("trello-list-select");
-                    let selectOptions = "";
-                    lists.forEach((list) => {
-                        selectOptions += `<option value="${list.id}">${list.name}</option>`
-                    });
-
-                    listSelect.innerHTML = selectOptions;
-                    listSelectContainer.classList.toggle("invisible");
-                }
-            }
-        }
-
-        function listSelectionChange() {
-            let cardTitleContainer = document.getElementById("trello-card-title-container");
-
-            if (cardTitleContainer.classList.contains("invisible")) {
-                cardTitleContainer.classList.toggle("invisible");
-            }
-        }
     </script>
 {% endblock %}
