@@ -24,7 +24,7 @@ class TrelloIntegration extends \Tina4\Api
     {
         if(empty($APIKey))
         {
-            $this->APIKey = $_ENV["TRELLO_API_KEY"];
+            $this->APIKey = $_ENV["TRELLO_API_KEY"]?? "";
         }
         else
         {
@@ -33,7 +33,7 @@ class TrelloIntegration extends \Tina4\Api
 
         if(empty($APIToken))
         {
-            $this->APIToken = $_ENV["TRELLO_API_TOKEN"];
+            $this->APIToken = $_ENV["TRELLO_API_TOKEN"]?? "";
         }
         else
         {
