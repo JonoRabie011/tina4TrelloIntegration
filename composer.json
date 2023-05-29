@@ -31,7 +31,10 @@
         "test:verbose": "@tina4 tests:verbose",
         "initialize": "@tina4 initialize:run",
         "start": "@tina4 webservice:run",
-        "start-service": "@tina4service"
+        "start-service": "@tina4service",
+        "post-autoload-dump": [
+            "php -r \"copy('./vendor/tina4components/tina4trellointegration/src/public/js/trello-integration.js', './src/public/js/trello-integration.js');\""
+        ]
     },
     "config": {
         "process-timeout": 0
