@@ -2,25 +2,29 @@
 {% block content %}
     <div class="trello-notifications-list-container p-3">
 
-        <div class="row">
-            <div class="col-8">
-                <h2 class="mb-4">
+        <div class="row mb-4">
+            <div class="col-8 ">
+                <h2>
                     Notifications
                 </h2>
+                <span class="float-start">{{ today }}</span>
             </div>
 
             <div class="col-4">
-                <span class="float-end">{{ today }}</span>
+                <a class="btn btn-primary float-end"
+                        href="/trello/quick-action/card/add/{{ memberId }}?key={{ apiKey }}&token={{ apiToken }}">
+                    Create Card
+                </a>
             </div>
         </div>
 
         {% for notification in notifications %}
             <div class="row g-2">
-                {#    {{ notification.type }}#}
                 {% if notification.type == 'cardDueSoon' %}
                     {% include "trello-integration/notifications/notifications-types/trello-notification-card-due.twig" with { notification, today } %}
                 {% endif %}
             </div>
         {% endfor %}
     </div>
+    <div id="trello-notification-create-card"></div>
 {% endblock %}

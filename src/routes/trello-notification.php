@@ -17,7 +17,10 @@ Get::add("/trello/member/notifications/{memberId}", function ($memberId, Respons
 
     return $response(\Tina4\renderTemplate("/trello-integration/notifications/trello-notifications-list.twig", [
         "today" => $todayDate,
-        "notifications" => $trelloNotifications["body"]
+        "notifications" => $trelloNotifications["body"],
+        "memberId" => $memberId,
+        "apiToken" => $trelloMember->getAPIToken(),
+        "apiKey" => $trelloMember->getAPIKey()
     ]),
     HTTP_OK, TEXT_HTML);
 });

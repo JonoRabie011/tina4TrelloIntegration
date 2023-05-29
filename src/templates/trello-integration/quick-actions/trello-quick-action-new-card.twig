@@ -1,6 +1,6 @@
 {% extends "base.twig" %}
 {% block content %}
-{#    {{dump(boards)}}#}
+    <h3 class="mx-2">Create new card</h3>
     <form id="trelloQuickActionCreateCardForm" class="m-4"
           action="/trello/quick-action/card/add/{{ member }}{{ token and key ? "?token="~token~"&key="~key : ""}}"
           method="post">
@@ -40,7 +40,4 @@
 
         {{ "trelloQuickActionCreateCardForm" | formToken | raw }}
     </form>
-
-    <script>
-    </script>
 {% endblock %}
