@@ -18,7 +18,7 @@ class TrelloMember extends TrelloIntegration
      * Function to information for a single member by member ID
      * @param string $memberId
      * @param string $boards If you pass in this param it will return board for a member
-     *           <br> e.g "<br>
+     *           <br> e.g <br>
      *            'all' or a comma-separated list of:
      *           <br>
      *           <hr>

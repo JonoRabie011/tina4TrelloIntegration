@@ -58,7 +58,10 @@ Post::add("/trello/quick-action/card/add/{memberId}",
         if($trelloCardCreate["httpCode"] === 200) {
             return $response(\Tina4\renderTemplate("/trello-integration/trello-success.twig",
                     [
-                        "body" => $trelloCardCreate["body"]
+                        "body" => "<script>" .
+                                     "window.open('{$trelloCardCreate['body']['shortUrl']}', '_blank');" .
+                                     "window.location.href = '/trello/quick-action/card/add/{$memberId}?token={$trelloCard->getAPIToken()}&key={$trelloCard->getAPIKey()}'" .
+                                  "</script>"
                     ])
                 ,HTTP_OK, TEXT_HTML);
         }
