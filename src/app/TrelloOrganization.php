@@ -14,6 +14,33 @@ class TrelloOrganization extends TrelloIntegration
         parent::__construct($APIKey, $APIToken);
     }
 
+    /**
+     * Gets members of an organization
+     * @param string $organizationId
+     * @return array|mixed
+     */
+    public function getOrganizationMembers(string $organizationId)
+    {
+        return $this->sendRequest("/organizations/{$organizationId}/members".$this->getParamString());
+    }
+
+    /**
+     * List the boards in a Workspace
+     * @param string $organizationId
+     * @param string $filter 'all' or a comma-separated list of: 'open', 'closed', 'members', 'organization', 'public'
+     * @param string $fields 'all' or a comma-separated list of: 'id', 'name', 'desc', 'descData', 'closed',
+     *                          'idMemberCreator', 'idOrganization', 'pinned', 'url', 'shortUrl', 'prefs', 'labelNames',
+     *                          'starred', 'limits', 'memberships', 'enterpriseOwned'
+     * @return mixed
+     */
+    public function getOrganizationBoards(string $organizationId, string $filter = "all", string $fields = "all") : mixed
+    {
+        $this->addQueryParam("filter", $filter);
+        $this->addQueryParam("fields", $fields);
+
+        return $this->sendRequest("/organizations/{$organizationId}/boards".$this->getParamString());
+    }
+
 
 //    public function createOrganization($displayName, $optionalParams = [])
 //    {
