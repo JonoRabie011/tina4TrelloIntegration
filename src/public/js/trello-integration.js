@@ -8,7 +8,7 @@ function renderBoardLists(selectedBoard, boards) {
         console.log(lists);
         if (lists.length !== 0) {
             const listSelect = document.getElementById("trello-list-select");
-            let selectOptions = "";
+            let selectOptions = `<option selected disabled>Select a list</option>`;
             lists.forEach((list) => {
                 selectOptions += `<option value="${list.id}">${list.name}</option>`
             });
