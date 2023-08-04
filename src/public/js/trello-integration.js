@@ -27,6 +27,11 @@ function renderBoardLists(selectedBoard, boards) {
             cardTitleContainer.classList.add("invisible");
             cardTitleContainer.classList.add("d-none");
         }
+
+        if (!(cardTitleContainer.classList.contains("invisible"))) {
+            cardTitleContainer.classList.add("invisible");
+            cardTitleContainer.classList.add("d-none");
+        }
     }
 }
 
