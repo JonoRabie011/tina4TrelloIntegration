@@ -9,13 +9,6 @@
                 </h2>
                 <span class="float-start">{{ today }}</span>
             </div>
-
-            <div class="col-4">
-                <a class="btn btn-primary float-end"
-                        href="/trello/quick-action/card/add/{{ memberId }}?key={{ apiKey }}&token={{ apiToken }}">
-                    Create Card
-                </a>
-            </div>
         </div>
 
         {% for notification in notifications %}

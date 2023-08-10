@@ -49,7 +49,7 @@ class TrelloCard extends TrelloIntegration
 
         if (!empty($cardMembers))
         {
-            $this->addQueryParam("idMembers", $cardMembers);
+            $this->addQueryParam("idMembers", implode(",",$cardMembers));
         }
 
 
@@ -64,9 +64,9 @@ class TrelloCard extends TrelloIntegration
      */
     public function addMembersToCard(string $cardId, array $cardMembers): mixed
     {
-        $this->addQueryParam("idMembers", $cardMembers);
+        $this->addQueryParam("value", implode(",",$cardMembers));
 
-        return $this->sendRequest("/cards/{$cardId}".$this->getParamString(), "PUT");
+        return $this->sendRequest("/cards/{$cardId}/idMembers".$this->getParamString(), "POST");
     }
 
 
@@ -105,7 +105,7 @@ class TrelloCard extends TrelloIntegration
      */
     public function getAttachmentsOnCard(string $cardId): mixed
     {
-        return $this->sendRequest("/cards/{$cardId}/attachments");
+        return $this->sendRequest("/cards/{$cardId}/attachments".$this->getParamString());
     }
 
     /**
@@ -116,23 +116,32 @@ class TrelloCard extends TrelloIntegration
      */
     public function getAttachmentOnCard(string $cardId, string $attachmentId): mixed
     {
-        return $this->sendRequest("/cards/{$cardId}/attachments/{$attachmentId}");
+        return $this->sendRequest("/cards/{$cardId}/attachments/{$attachmentId}".$this->getParamString());
     }
 
 
     /**
-     * Create new attachment on card
+     * Create an attachment on a card.
+     * <br>
+     * <i>You need to supply a '$file' or '$url' or both for the method to work, else response is an HTTP 400 error.</i>
      * @param string $cardId ID of targeted card
      * @param string $fileName Custom file name for attachment
      * @param string $file Binary string for card
-     * @return array|mixed
+     * @param string $mimeType The mimeType of the attachment. Max length 256
+     * @param string $fileUrl A URL to attach. Must start with 'http://' or 'https://'
+     * @return mixed
      */
-    public function createAttachmentOnCard(string $cardId, string $fileName, $file): mixed
+    public function createAttachmentOnCard(string $cardId, string $fileName, string $file ="", string $mimeType = "", string $fileUrl = ""): mixed
     {
-        $this->addQueryParam("name", $fileName);
+        if (!empty($file)) {
+            $this->addQueryParam("file", $file);
+            if (!empty($mimeType))
+                $this->addQueryParam("mimeType", $mimeType);
+        }
 
-        $this->addQueryParam("file", $file);
+        if (!empty($fileUrl))
+            $this->addQueryParam("url", $fileUrl);
 
-        return $this->sendRequest("/cards/{$cardId}/attachments", "POST");
+        return $this->sendRequest("/cards/{$cardId}/attachments".$this->getParamString(), "POST");
     }
 }
