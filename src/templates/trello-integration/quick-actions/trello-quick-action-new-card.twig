@@ -27,16 +27,20 @@
         </div>
 
         <div id="trello-card-title-container" class="mb-3 invisible d-none">
-            <label for="trello-card-title">Card Name</label>
-            <input id="trello-card-title" name="title" type="text" class="form-control">
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <button type="button" class="btn">Cancel</button>
-                <button type="submit" class="btn btn-primary">Create Card</button>
+            <div class="row mb-2">
+                <div class="col-12">
+                    <label for="trello-card-title">Card Name</label>
+                    <input id="trello-card-title" name="title" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button type="button" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Card</button>
+                </div>
             </div>
         </div>
+
 
         {{ "trelloQuickActionCreateCardForm" | formToken | raw }}
     </form>
