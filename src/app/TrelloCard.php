@@ -19,7 +19,7 @@ class TrelloCard extends TrelloIntegration
      * This Function creates a new card on a trello list
      * @param string $listId The ID of the list the card should be created in
      * @param string $cardTitle The name for the card
-     * @param string|int $cardPosition The position of the new card. top, bottom, or a positive float default is "bottom"
+     * @param string $cardPosition The position of the new card. top, bottom, or a positive float default is "bottom"
      * @param string $cardDescription The description for the card
      * @param null $cardDueDate A due date for the card "Format must be date"
      * @param array $cardMembers "Array of strings" Comma-separated list of member IDs to add to the card
