@@ -21,7 +21,7 @@ class TrelloBoard extends TrelloIntegration
      * @param string $boardId ID of board you want to fetch
      * @param bool $fetchLists "true" if you want to retrieve lists for board
      * @param bool $fetchCards "true" if you want to retrieve card for board
-     * @return array | mixed
+     * @return mixed
      */
     public function getBoard(string $boardId, bool $fetchLists = false, bool $fetchCards = false): mixed
     {
