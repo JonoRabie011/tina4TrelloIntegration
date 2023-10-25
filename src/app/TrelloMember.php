@@ -83,7 +83,7 @@ class TrelloMember extends TrelloIntegration
 
     }
 
-    public function getMemberNotifications($memberId, $readFilter = "all", )
+    public function getMemberNotifications($memberId)
     {
 
         return $this->sendRequest("/members/{$memberId}/notifications".$this->getParamString());
