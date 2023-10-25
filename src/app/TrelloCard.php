@@ -27,7 +27,7 @@ class TrelloCard extends TrelloIntegration
      */
     public function createCard(string $listId,
                                string $cardTitle,
-                               string | int $cardPosition= "bottom",
+                               string $cardPosition= "bottom",
                                string $cardDescription = "",
                                $cardDueDate = null,
                                array $cardMembers = []): mixed
